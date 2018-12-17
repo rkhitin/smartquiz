@@ -1,16 +1,7 @@
-import express from 'express'
-import morgan from 'morgan'
+import startApp from './app'
+import { logger } from './utils'
+import { db } from './db'
 
-import { envs, logger } from './utils'
+db.on('error', () => logger.error('db connection error'))
 
-const app = express()
-const port = envs.isProd ? 80 : 1234
-
-// Log http request only in development
-if (envs.isDev) {
-  app.use(morgan('combined'))
-}
-
-app.get('/', (req, res) => res.send('H98llo World!'))
-
-app.listen(port, () => logger.log('info', `Example app listening on port ${port}!`))
+db.once('open', startApp)
