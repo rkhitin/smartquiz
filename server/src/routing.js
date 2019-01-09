@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import { register, authorize } from './auth'
+import { register, loginCallbacks } from './auth'
 
 const router = Router()
 
 router.post('/register', register)
-router.get('/authorize', authorize)
+router.get('/login', ...loginCallbacks)
 
 export default router

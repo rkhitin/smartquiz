@@ -3,10 +3,9 @@ import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
-import passport from './auth/passport'
+import passport from './passport'
 
 import { envs, logger } from './utils'
-import { sessionSecret } from './config'
 import routing from './routing'
 
 export default function() {
@@ -22,7 +21,7 @@ export default function() {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
-  app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }))
+  app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
   app.use(passport.initialize())
   app.use(passport.session())
 

@@ -33,3 +33,5 @@ dist
 error.log
 
 .vscode
+
+.env

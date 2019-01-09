@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 
 import { User } from '../db/models'
+import passport from './passport'
 
 export const register = async (req, res) => {
   try {
@@ -25,12 +26,14 @@ export const register = async (req, res) => {
   }
 }
 
-export const authorize = async (req, res) => {
-  const u = await User.findOne({}).exec()
+const authorize = async (req, res) => {
+  //   const u = await User.findOne({}).exec()
 
-  const r = await u.verifyPassword('123')
+  //   const r = await u.verifyPassword('123')
 
-  console.log(r)
+  // console.log(req.user)
 
   res.send('asdf')
 }
+
+export const loginCallbacks = [passport.authenticate('local'), authorize]

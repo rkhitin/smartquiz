@@ -1,17 +1,16 @@
 import mongoose from 'mongoose'
 
 import { envs } from '../utils'
-import { db as dbConfig } from '../config'
 
 const dbName = (() => {
   switch (true) {
     case envs.isTest:
-      return dbConfig.dbNames.test
+      return process.env.TEST_DB_NAME
     case envs.isProd:
-      return dbConfig.dbNames.prod
+      return process.env.DB_NAME
     case envs.isDev:
     default:
-      return dbConfig.dbNames.dev
+      return process.env.DEV_DB_NAME
   }
 })()
 
