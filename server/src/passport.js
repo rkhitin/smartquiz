@@ -26,6 +26,8 @@ passport.use(
       try {
         const user = await User.findOne({ login })
 
+        if (!user) return done(null, false)
+
         const isPasswordCorrect = await user.verifyPassword(password)
 
         if (!isPasswordCorrect) return done(null, false)

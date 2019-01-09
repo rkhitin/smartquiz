@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src -d dist",
-    "start": "NODE_ENV=development nodemon src/index.js --exec babel-node"
+    "start": "NODE_ENV=development nodemon -r node_modules/dotenv/config src/index.js --exec babel-node",
+    "seed:dev": "NODE_ENV=development babel-node -r node_modules/dotenv/config src/db/seeds/dev.js"
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",

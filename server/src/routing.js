@@ -1,10 +1,9 @@
 import { Router } from 'express'
 
-import { register, loginCallbacks } from './auth'
+import { routing as usersRouting } from './users'
 
 const router = Router()
 
-router.post('/register', register)
-router.get('/login', ...loginCallbacks)
+router.use('/users', usersRouting)
 
 export default router

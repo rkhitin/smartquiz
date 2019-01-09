@@ -3,8 +3,8 @@ import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
-import passport from './passport'
 
+import passport from './passport.js'
 import { envs, logger } from './utils'
 import routing from './routing'
 
