@@ -24,7 +24,7 @@ export default async (req, res) => {
     const userData = {
       login,
       role,
-      password: encryptedPassword,
+      encryptedPassword,
     }
 
     const newUser = new User(userData)

@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src -d dist",
+    "test": "NODE_ENV=testing mocha -r node_modules/dotenv/config --require @babel/register --require @babel/polyfill --exit --recursive src/tests",
     "start": "NODE_ENV=development nodemon -r node_modules/dotenv/config src/index.js --exec babel-node",
     "seed:dev": "NODE_ENV=development babel-node -r node_modules/dotenv/config src/db/seeds/dev.js"
   },
@@ -26,9 +27,14 @@
   },
   "devDependencies": {
     "@babel/node": "^7.2.0",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
     "eslint": "^5.10.0",
     "eslint-config-prettier": "^3.3.0",
-    "nodemon": "^1.18.8"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.8",
+    "supertest": "^3.3.0"
   }
 }

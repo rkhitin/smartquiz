@@ -4,13 +4,13 @@ import { usersRoles } from '../contants'
 
 const userSchema = new Schema({
   login: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  encryptedPassword: { type: String, required: true },
   role: { type: String, required: true, enum: Object.keys(usersRoles) },
 })
 
 userSchema.method('verifyPassword', async function(password) {
   try {
-    const res = await bcrypt.compare(password, this.password)
+    const res = await bcrypt.compare(password, this.encryptedPassword)
 
     return res
   } catch (_) {

@@ -10,7 +10,7 @@ import routing from './routing'
 
 export default function() {
   const app = express()
-  const port = envs.isProd ? 80 : 1234
+  const port = envs.isProd ? 80 : envs.isTest ? 4321 : 1234
 
   // Log http request only in development
   if (envs.isDev) {
@@ -30,4 +30,6 @@ export default function() {
   app.get('/', (req, res) => res.send('hello'))
 
   app.listen(port, () => logger.info(`Example app listening on port ${port}!`))
+
+  return app
 }
