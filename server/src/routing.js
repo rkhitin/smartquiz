@@ -1,9 +1,9 @@
 import { Router } from 'express'
 
-import { routing as usersRouting } from './users'
+import { router as usersRouter } from '@users/api'
 
 const router = Router()
 
-router.use('/users', usersRouting)
+router.use('/users', usersRouter)
 
 export default router

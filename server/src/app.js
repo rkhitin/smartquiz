@@ -4,16 +4,16 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 
-import passport from './passport.js'
-import { envs, logger } from './utils'
+import { getConfig, logger } from '@utils'
+import { passport } from '@libs'
 import routing from './routing'
 
 export default function() {
   const app = express()
-  const port = envs.isProd ? 80 : envs.isTest ? 4321 : 1234
+  const port = getConfig().port
 
   // Log http request only in development
-  if (envs.isDev) {
+  if (process.env.NODE_ENV === 'development') {
     app.use(morgan('combined'))
   }
 
@@ -27,9 +27,10 @@ export default function() {
 
   // Routing
   app.use('/api', routing)
+  // TODO: remove
   app.get('/', (req, res) => res.send('hello'))
 
-  app.listen(port, () => logger.info(`Example app listening on port ${port}!`))
+  app.listen(port, () => logger.info(`App listening on port ${port}!`))
 
   return app
 }

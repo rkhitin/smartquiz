@@ -1,11 +1,8 @@
-import { User } from '../db/models'
-import { usersRoles } from '../db/contants'
+import { User, usersRoles } from '@users'
 
 // Удаление юзера. Можно удалять себя или кого угодно если админ
 export default async (req, res) => {
   try {
-    if (!req.user) return res.sendStatus(401)
-
     const { id } = req.body
 
     const removingUser = User.findOne({ id })

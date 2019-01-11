@@ -1,3 +1,4 @@
-import routing from './routing'
+import User from './model'
+import { usersRoles } from './constants'
 
-export { routing }
+export { User, usersRoles }

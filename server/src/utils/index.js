@@ -1,4 +1,5 @@
-import envs from './envs'
+import getConfig from './getConfig'
 import logger from './logger'
+import checkAuthentication from './checkAuthentication'
 
-export { envs, logger }
+export { getConfig, logger, checkAuthentication }
