@@ -17,7 +17,7 @@ router.get('/logout', function(req, res) {
 // Getters
 router.get('/', checkAuthentication, require('./list').default)
 router.get('/me', checkAuthentication, require('./me').default)
-router.post('/get', require('./get').default)
+router.post('/get', checkAuthentication, require('./get').default)
 
 // Setters
 router.post('/create', checkAuthentication, require('./create').default)

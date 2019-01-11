@@ -5,10 +5,10 @@ export default async (req, res) => {
   try {
     const { id } = req.body
 
-    const findingUser = await User.findOne({ _id: id })
-
     // Если текущий юзер не админ и пытается получить не себя - посылаем его
-    if (req.user.role !== usersRoles.admin && req.user._id !== findingUser._id) return res.sendStatus(403)
+    if (req.user.role !== usersRoles.admin && req.user._id.toString() !== id) return res.sendStatus(403)
+
+    const findingUser = await User.findOne({ _id: id })
 
     res.json(findingUser)
   } catch (err) {

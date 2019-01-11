@@ -5,9 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src -d dist",
-    "test": "NODE_ENV=testing mocha -r node_modules/dotenv/config --require @babel/register --require @babel/polyfill --exit --recursive src/tests",
+    "test": "npm run 'seed:test'  --scripts-prepend-node-path; npm run '_test' --scripts-prepend-node-path",
     "start": "NODE_ENV=development nodemon -r node_modules/dotenv/config src/index.js --exec babel-node",
-    "seed:dev": "NODE_ENV=development babel-node -r node_modules/dotenv/config src/db/seeds.js"
+    "seed:test": "NODE_ENV=testing babel-node -r node_modules/dotenv/config src/db/seeds.js",
+    "seed:dev": "NODE_ENV=development babel-node -r node_modules/dotenv/config src/db/seeds.js",
+    "_test": "NODE_ENV=testing mocha -r node_modules/dotenv/config --require @babel/register --require @babel/polyfill --exit --file src/tests/init.js src/tests/index.js"
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",
@@ -43,6 +45,7 @@
     "@db": "src/db",
     "@utils": "src/utils",
     "@libs": "src/libs",
+    "@tests": "src/tests",
     "@users": "src/users"
   }
 }

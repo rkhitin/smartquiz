@@ -16,7 +16,7 @@ db.once('open', async () => {
   await User.encryptPasswordAndCreateUser({
     password: getConfig().editor.password,
     login: getConfig().editor.login,
-    role: usersRoles.admin,
+    role: usersRoles.editor,
   })
 
   db.close()

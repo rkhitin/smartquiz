@@ -1,8 +1,6 @@
 export default (req, res, next) => {
   if (!req.user) {
-    res.send(401)
-
-    next()
+    res.sendStatus(401)
 
     return
   }

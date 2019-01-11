@@ -1,5 +1,8 @@
+import 'module-alias/register'
+
 import request from 'supertest'
-import { db } from '../db'
+
+import db from '@db'
 import startApp from '../app'
 
 before(done => {

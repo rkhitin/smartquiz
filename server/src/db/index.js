@@ -1,3 +1,3 @@
 import db from './mongoose'
 
-export { db }
+export default db

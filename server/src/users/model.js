@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
 
 import { usersRoles } from './constants'
-import { verifyPassword, encryptPasswordAndCreateUser } from './services'
+import { verifyPassword, encryptPasswordAndCreateUser, updateUser } from './services'
 
 const userSchema = new Schema({
   login: { type: String, required: true, unique: true },
@@ -14,6 +14,7 @@ userSchema.method('verifyPassword', verifyPassword)
 
 // Statics methods
 userSchema.statics.encryptPasswordAndCreateUser = encryptPasswordAndCreateUser
+userSchema.statics.updateUser = updateUser
 
 const User = model('User', userSchema)
 
