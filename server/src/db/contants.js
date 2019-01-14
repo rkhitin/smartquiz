@@ -3,8 +3,3 @@ export const attachmentsTypes = {
   video: 'video',
   audio: 'audio',
 }
-
-export const usersRoles = {
-  admin: 'admin',
-  editor: 'editor',
-}
