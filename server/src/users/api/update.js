@@ -7,11 +7,9 @@ export default async (req, res) => {
     const { id } = req.body
 
     // Если текущий юзер не админ и пытается обновить не себя - посылаем его
-    if (req.user.role !== usersRoles.admin && req.user._id !== id) return res.sendStatus(403)
+    if (req.user.role !== usersRoles.admin && req.user._id.toString() !== id) return res.sendStatus(403)
 
     const [err, updatingUser] = await User.updateUser(req.body)
-
-    console.log(updatingUser)
 
     if (err) return res.status(400).send(err.message)
 

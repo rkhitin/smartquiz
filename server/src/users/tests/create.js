@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 
 import { authenticate, checkUser } from '@tests/helpers'
+import { messages } from '../constants'
 
 const users = {
   withExistLogin: {
@@ -58,7 +59,7 @@ describe('Create', async () => {
       .send(users.withExistLogin)
       .expect(400)
 
-    expect(res.text).to.equal('Пользователь с таким логином уже существует')
+    expect(res.text).to.equal(messages.sameLoginExist)
   })
 
   it('Can not create user with short password', async () => {
@@ -67,7 +68,7 @@ describe('Create', async () => {
       .send(users.withShortPassword)
       .expect(400)
 
-    expect(res.text).to.equal('Слишком короткий пароль')
+    expect(res.text).to.equal(messages.toShortPassword)
   })
 
   it('Can not create user with wrong role', async () => {
@@ -76,7 +77,7 @@ describe('Create', async () => {
       .send(users.withWrongRole)
       .expect(400)
 
-    expect(res.text).to.equal('Неправильная роль')
+    expect(res.text).to.equal(messages.wrongRole)
   })
 
   it('Can create correct user', async () => {
@@ -84,6 +85,8 @@ describe('Create', async () => {
       .post('/api/users/create')
       .send(users.correct)
       .expect(200)
+
+    global.newUserId = res.body._id
 
     checkUser(res.body, users.correct)
   })

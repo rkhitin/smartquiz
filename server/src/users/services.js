@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 
 import { logger } from '@utils'
-import { usersRoles } from './constants'
+import { usersRoles, messages } from './constants'
 
 /**
  * @this instance of User
@@ -24,14 +24,14 @@ export async function verifyPassword(password) {
  * @retun [error, user]
  */
 export async function encryptPasswordAndCreateUser({ login, password, role }) {
-  if (!Object.keys(usersRoles).includes(role)) return [{ message: 'Неправильная роль' }, null]
+  if (!Object.keys(usersRoles).includes(role)) return [{ message: messages.wrongRole }, null]
 
   try {
     const existUser = await this.findOne({ login })
 
-    if (existUser) return [{ message: 'Пользователь с таким логином уже существует' }, null]
+    if (existUser) return [{ message: messages.sameLoginExist }, null]
 
-    if (password.length < 5) return [{ message: 'Слишком короткий пароль' }, null]
+    if (password.length < 5) return [{ message: messages.toShortPassword }, null]
 
     const encryptedPassword = await bcrypt.hash(password, 10)
 
@@ -54,20 +54,18 @@ export async function encryptPasswordAndCreateUser({ login, password, role }) {
  * @retun [error, user]
  */
 export async function updateUser({ id, login, password, role }) {
-  if (role && !Object.keys(usersRoles).includes(role)) return [{ message: 'Неправильная роль' }, null]
+  if (role && !Object.keys(usersRoles).includes(role)) return [{ message: messages.wrongRole }, null]
 
-  if (password && password.length < 5) return [{ message: 'Слишком короткий пароль' }, null]
+  if (password && password.length < 5) return [{ message: messages.toShortPassword }, null]
 
   try {
-    if (login) {
-      const userWithSameLogin = await this.findOne({ login })
-
-      if (userWithSameLogin) return [{ message: 'Пользователь с таким логином уже существует' }, null]
-    }
-
     const updatingUser = await this.findOne({ _id: id })
 
     if (login) {
+      const userWithSameLogin = await this.findOne({ login })
+
+      if (userWithSameLogin) return [{ message: messages.sameLoginExist }, null]
+
       updatingUser.login = login
     }
 

@@ -12,4 +12,5 @@ describe('Users', () => {
   require('./get')
   require('./create')
   require('./update')
+  require('./remove')
 })
