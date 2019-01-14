@@ -38,8 +38,12 @@
     "eslint-config-prettier": "^3.3.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.8",
+    "pre-push": "^0.1.1",
     "supertest": "^3.3.0"
   },
+  "pre-push": [
+    "test"
+  ],
   "_moduleAliases": {
     "@root": ".",
     "@db": "src/db",
